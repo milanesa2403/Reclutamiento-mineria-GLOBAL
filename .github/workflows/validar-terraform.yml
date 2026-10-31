@@ -1,0 +1,23 @@
+name: Validar Terraform
+
+run-name: ${{github.actor}} esta validando el codigo Terraform
+on:
+    pull_request:
+        branches:
+            - development
+            - main
+
+permissions:
+    contents: read
+
+jobs:
+    Validar-Terraform:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: hashicorp/setup-terraform@v3
+              with:
+                  terraform_version: 1.10.5
+            - run: terraform -chdir=terraform fmt -check -recursive
+            - run: terraform -chdir=terraform init -backend=false
+            - run: terraform -chdir=terraform validate

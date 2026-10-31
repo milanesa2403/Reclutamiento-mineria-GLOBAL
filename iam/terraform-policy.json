@@ -1,0 +1,43 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "StateBucketList",
+      "Effect": "Allow",
+      "Action": "s3:ListBucket",
+      "Resource": "arn:aws:s3:::<TF_STATE_BUCKET>",
+      "Condition": {
+        "StringLike": {
+          "s3:prefix": [
+            "lab09/dev",
+            "lab09/dev/*"
+          ]
+        }
+      }
+    },
+    {
+      "Sid": "StateObjects",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:DeleteObject"
+      ],
+      "Resource": [
+        "arn:aws:s3:::<TF_STATE_BUCKET>/lab09/dev/terraform.tfstate",
+        "arn:aws:s3:::<TF_STATE_BUCKET>/lab09/dev/terraform.tfstate.tflock"
+      ]
+    },
+    {
+      "Sid": "EC2SoloEnRegion",
+      "Effect": "Allow",
+      "Action": "ec2:*",
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:RequestedRegion": "us-east-2"
+        }
+      }
+    }
+  ]
+}
