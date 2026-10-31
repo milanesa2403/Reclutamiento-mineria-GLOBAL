@@ -31,7 +31,7 @@ jobs:
     Publicar-en-AWS:
         runs-on: ubuntu-latest
         needs: Validar-Infraestructura
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/development'
         steps:
             - run: echo "Solo se ejecuta cuando el cambio llega a la rama main"
             - run: echo "Se crea la infraestructura con terraform apply (red, EC2, balanceador, RDS, SQS y S3)"
