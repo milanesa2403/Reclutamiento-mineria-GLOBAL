@@ -1,64 +1,69 @@
 name: Github Actions sobre Plataforma Mineria
 
 run-name: ${{github.actor}} esta ejecutando el pipeline de la Plataforma Mineria
-
 on:
-  push:
-    branches:
-      - main
-      - development
-      - 'releases/**'
-  pull_request:
-    branches:
-      - development
-      - main
+    push:
+        branches:
+            - main
+            - development
+            - 'releases/**'
+    pull_request:
+        branches:
+            - development
+            - main
 
 permissions:
-  contents: read
-  id-token: write
+    contents: read
 
 jobs:
-  Validar-Codigo-Backend-y-Frontend:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "Evento ${{github.event_name}} en la rama ${{github.ref}}"
+    Validar-Infraestructura:
+        runs-on: ubuntu-latest
+        steps:
+            - run: echo "Evento ${{github.event_name}} en la rama ${{github.ref}} del repositorio ${{github.repository}}"
+            - uses: actions/checkout@v4
+            - uses: hashicorp/setup-terraform@v3
+              with:
+                  terraform_version: 1.10.5
+            - run: terraform -chdir=terraform fmt -check -recursive
+            - run: terraform -chdir=terraform init -backend=false
+            - run: terraform -chdir=terraform validate
 
-  Validar-Infraestructura:
-    runs-on: ubuntu-latest
-    needs: Validar-Codigo-Backend-y-Frontend
-    steps:
-      - run: echo "Validacion completada"
+    Publicar-en-AWS:
+        runs-on: ubuntu-latest
+        needs: Validar-Infraestructura
+        if: github.event_name == 'push' && github.ref == 'refs/heads/development'
+        environment: dev
+        permissions:
+            contents: read
+            id-token: write
+        outputs:
+            web_url: ${{steps.salida.outputs.web_url}}
+        steps:
+            - uses: actions/checkout@v4
+            - uses: aws-actions/configure-aws-credentials@v4
+              with:
+                  role-to-assume: ${{vars.AWS_ROLE_ARN}}
+                  aws-region: ${{vars.AWS_REGION}}
+            - uses: hashicorp/setup-terraform@v3
+              with:
+                  terraform_version: 1.10.5
+                  terraform_wrapper: false
+            - run: terraform -chdir=terraform init -backend-config="bucket=${{vars.TF_STATE_BUCKET}}" -backend-config="region=${{vars.AWS_REGION}}"
+            - run: terraform -chdir=terraform plan -input=false -var="aws_region=${{vars.AWS_REGION}}" -out=tfplan
+            - run: terraform -chdir=terraform apply -input=false -auto-approve tfplan
+            - id: salida
+              run: echo "web_url=$(terraform -chdir=terraform output -raw web_url 2>/dev/null || true)" >> "$GITHUB_OUTPUT"
 
-  Publicar-en-AWS:
-    runs-on: ubuntu-latest
-    needs: Validar-Infraestructura
-    environment: dev
-    if: github.ref == 'refs/heads/development'
-    steps:
-      - name: Checkout del codigo
-        uses: actions/checkout@v4
-
-      - name: Configurar credenciales de AWS via OIDC
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
-          aws-region: ${{ vars.AWS_REGION }}
-
-      - name: Configurar ejecutor de Terraform
-        uses: hashicorp/setup-terraform@v3
-
-      - name: Inicializar Terraform con Backend S3
-        run: |
-          cd terraform
-          terraform init -backend-config="bucket=${{ vars.TF_STATE_BUCKET }}" -backend-config="key=lab09/dev/terraform.tfstate" -backend-config="region=${{ vars.AWS_REGION }}"
-
-      - name: Aplicar Infraestructura en AWS
-        run: |
-          cd terraform
-          terraform apply -auto-approve
-
-  Comprobar-Publicacion:
-    runs-on: ubuntu-latest
-    needs: Publicar-en-AWS
-    steps:
-      - run: echo "Comprobacion de despliegue exitosa"
+    Comprobar-Publicacion:
+        runs-on: ubuntu-latest
+        needs: Publicar-en-AWS
+        if: needs.Publicar-en-AWS.outputs.web_url != ''
+        steps:
+            - run: echo "Se comprueba que la pagina responda en ${{needs.Publicar-en-AWS.outputs.web_url}}"
+            - run: |
+                  for i in $(seq 1 20); do
+                      if curl -fsS --max-time 5 "${{needs.Publicar-en-AWS.outputs.web_url}}"; then exit 0; fi
+                      echo "Intento $i: todavia no responde, esperando 15 segundos"
+                      sleep 15
+                  done
+                  exit 1
