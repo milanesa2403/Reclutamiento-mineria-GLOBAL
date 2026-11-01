@@ -1,3 +1,9 @@
+# Proyecto de Infraestructura sobre Plataforma de Reclutamiento Minero
+
+Proyecto: Plataforma global para reclutamiento de minería con infraestructura escalable.
+
+Hemos desplegado con Terraform la infraestructura del proyecto en AWS usando GitHub Actions. La conexión con AWS es por OIDC y el estado de Terraform se guarda en un bucket S3.
+
 ## Ramas
 - main: version final donde se encontrara todo el codigo
 - development: aqui se une todo y se despliega en AWS
