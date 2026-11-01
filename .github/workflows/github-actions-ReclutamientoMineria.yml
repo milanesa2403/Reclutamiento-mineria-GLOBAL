@@ -10,37 +10,60 @@ on:
     pull_request:
         branches:
             - development
-             - main
+            - main
+
+permissions:
+    contents: read
 
 jobs:
-    Validar-Codigo-Backend-y-Frontend:
+    Validar-Infraestructura:
         runs-on: ubuntu-latest
         steps:
             - run: echo "Evento ${{github.event_name}} en la rama ${{github.ref}} del repositorio ${{github.repository}}"
-            - run: echo "Se instalan Java 21 y Node 24, se revisa el estilo con npm run lint y se ejecutan las pruebas con mvn test"
-            - run: echo "Se exige una cobertura minima del 70% con mvn verify y se generan los archivos con mvn package y npm run build"
-
-    Validar-Infraestructura:
-        runs-on: ubuntu-latest
-        needs: Validar-Codigo-Backend-y-Frontend
-        steps:
-            - run: echo "Se revisa y valida Terraform con terraform fmt -check y terraform validate. El estado esta en un bucket S3"
-            - run: echo "Se muestra que recursos se crearian en AWS con terraform plan, sin aplicar nada"
-            - run: echo "Prueba de carga con k6 (300 usuarios por 10 minutos). Si hay mas de 5% de errores o mas de 3 segundos, no se publica"
+            - uses: actions/checkout@v4
+            - uses: hashicorp/setup-terraform@v3
+              with:
+                  terraform_version: 1.10.5
+            - run: terraform -chdir=terraform fmt -check -recursive
+            - run: terraform -chdir=terraform init -backend=false
+            - run: terraform -chdir=terraform validate
 
     Publicar-en-AWS:
         runs-on: ubuntu-latest
         needs: Validar-Infraestructura
-        if: github.ref == 'refs/heads/main'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/development'
+        environment: dev
+        permissions:
+            contents: read
+            id-token: write
+        outputs:
+            web_url: ${{steps.salida.outputs.web_url}}
         steps:
-            - run: echo "Solo se ejecuta cuando el cambio llega a la rama main"
-            - run: echo "Se crea la infraestructura con terraform apply (red, EC2, balanceador, RDS, SQS y S3)"
-            - run: echo "Se instala la aplicacion con ansible-playbook y el balanceador reparte el trafico entre las zonas A y B"
+            - uses: actions/checkout@v4
+            - uses: aws-actions/configure-aws-credentials@v4
+              with:
+                  role-to-assume: ${{vars.AWS_ROLE_ARN}}
+                  aws-region: ${{vars.AWS_REGION}}
+            - uses: hashicorp/setup-terraform@v3
+              with:
+                  terraform_version: 1.10.5
+                  terraform_wrapper: false
+            - run: terraform -chdir=terraform init -backend-config="bucket=${{vars.TF_STATE_BUCKET}}" -backend-config="region=${{vars.AWS_REGION}}"
+            - run: terraform -chdir=terraform plan -input=false -var="aws_region=${{vars.AWS_REGION}}" -out=tfplan
+            - run: terraform -chdir=terraform apply -input=false -auto-approve tfplan
+            - id: salida
+              run: echo "web_url=$(terraform -chdir=terraform output -json | jq -r '.web_url.value // empty')" >> "$GITHUB_OUTPUT"
 
     Comprobar-Publicacion:
         runs-on: ubuntu-latest
         needs: Publicar-en-AWS
+        if: needs.Publicar-en-AWS.outputs.web_url != ''
         steps:
-            - run: echo "Se comprueba con curl la ruta /health y se revisan los errores 5xx en CloudWatch"
-            - run: echo "Si los errores superan el 5%, se vuelve a la version anterior con terraform apply (maximo 15 minutos)"
-            - run: echo "Se avisa al equipo por correo con Amazon SNS"
+            - run: echo "Se comprueba que la pagina responda en ${{needs.Publicar-en-AWS.outputs.web_url}}"
+            - run: |
+                  for i in $(seq 1 20); do
+                      if curl -fsS --max-time 5 "${{needs.Publicar-en-AWS.outputs.web_url}}"; then exit 0; fi
+                      echo "Intento $i: todavia no responde, esperando 15 segundos"
+                      sleep 15
+                  done
+                  exit 1
