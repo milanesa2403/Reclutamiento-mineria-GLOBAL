@@ -52,7 +52,7 @@ jobs:
             - run: terraform -chdir=terraform plan -input=false -var="aws_region=${{vars.AWS_REGION}}" -out=tfplan
             - run: terraform -chdir=terraform apply -input=false -auto-approve tfplan
             - id: salida
-              run: echo "web_url=$(terraform -chdir=terraform output -raw web_url 2>/dev/null || true)" >> "$GITHUB_OUTPUT"
+              run: echo "web_url=$(terraform -chdir=terraform output -json | jq -r '.web_url.value // empty')" >> "$GITHUB_OUTPUT"
 
     Comprobar-Publicacion:
         runs-on: ubuntu-latest
