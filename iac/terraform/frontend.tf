@@ -44,3 +44,22 @@ resource "aws_s3_bucket_logging" "frontend" {
   target_bucket = aws_s3_bucket.logs.id
   target_prefix = "s3/frontend/"
 }
+
+resource "aws_s3_bucket_lifecycle_configuration" "frontend" {
+  bucket = aws_s3_bucket.frontend.id
+
+  rule {
+    id     = "versiones-anteriores"
+    status = "Enabled"
+
+    filter {}
+
+    noncurrent_version_expiration {
+      noncurrent_days = 30
+    }
+
+    abort_incomplete_multipart_upload {
+      days_after_initiation = 1
+    }
+  }
+}
