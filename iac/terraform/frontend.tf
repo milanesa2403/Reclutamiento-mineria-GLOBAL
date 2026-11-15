@@ -103,6 +103,21 @@ resource "aws_cloudfront_origin_access_control" "frontend" {
   signing_protocol                  = "sigv4"
 }
 
+resource "aws_cloudfront_function" "spa" {
+  name    = "${local.name}-spa"
+  runtime = "cloudfront-js-2.0"
+  publish = true
+  code    = <<-JS
+    function handler(event) {
+      var request = event.request;
+      if (request.uri.indexOf('.') === -1) {
+        request.uri = '/index.html';
+      }
+      return request;
+    }
+  JS
+}
+
 data "aws_cloudfront_cache_policy" "optimizado" {
   name = "Managed-CachingOptimized"
 }
@@ -132,6 +147,11 @@ resource "aws_cloudfront_distribution" "frontend" {
     compress                   = true
     cache_policy_id            = data.aws_cloudfront_cache_policy.optimizado.id
     response_headers_policy_id = data.aws_cloudfront_response_headers_policy.seguridad.id
+
+    function_association {
+      event_type   = "viewer-request"
+      function_arn = aws_cloudfront_function.spa.arn
+    }
   }
 
   restrictions {
