@@ -43,6 +43,17 @@ locals {
           Resource = "*"
         },
         {
+          Sid       = "CloudFrontPagina"
+          Effect    = "Allow"
+          Principal = { Service = "cloudfront.amazonaws.com" }
+          Action    = ["kms:Decrypt"]
+          Resource  = "*"
+          Condition = {
+            StringEquals = { "aws:SourceAccount" = local.account_id }
+            ArnLike      = { "aws:SourceArn" = "arn:aws:cloudfront::${local.account_id}:distribution/*" }
+          }
+        },
+        {
           Sid       = "VolumenesAutoScaling"
           Effect    = "Allow"
           Principal = { AWS = "*" }
