@@ -164,3 +164,19 @@ resource "aws_cloudfront_distribution" "frontend" {
     cloudfront_default_certificate = true
   }
 }
+
+output "frontend_url" {
+  value = "https://${aws_cloudfront_distribution.frontend.domain_name}"
+}
+
+output "cloudfront_domain" {
+  value = aws_cloudfront_distribution.frontend.domain_name
+}
+
+output "frontend_bucket" {
+  value = aws_s3_bucket.frontend.id
+}
+
+output "cloudfront_id" {
+  value = aws_cloudfront_distribution.frontend.id
+}
