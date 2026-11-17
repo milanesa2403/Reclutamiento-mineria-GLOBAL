@@ -110,3 +110,20 @@ resource "aws_lb_listener" "http" {
     }
   }
 }
+
+resource "aws_lb_listener_rule" "desde_cloudfront" {
+  listener_arn = aws_lb_listener.http.arn
+  priority     = 10
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.web.arn
+  }
+
+  condition {
+    http_header {
+      http_header_name = "X-Origen-CloudFront"
+      values           = [random_password.origen_cloudfront.result]
+    }
+  }
+}

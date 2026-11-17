@@ -103,6 +103,11 @@ resource "aws_cloudfront_origin_access_control" "frontend" {
   signing_protocol                  = "sigv4"
 }
 
+resource "random_password" "origen_cloudfront" {
+  length  = 32
+  special = false
+}
+
 resource "aws_cloudfront_function" "spa" {
   name    = "${local.name}-spa"
   runtime = "cloudfront-js-2.0"
@@ -122,6 +127,14 @@ data "aws_cloudfront_cache_policy" "optimizado" {
   name = "Managed-CachingOptimized"
 }
 
+data "aws_cloudfront_cache_policy" "sin_cache" {
+  name = "Managed-CachingDisabled"
+}
+
+data "aws_cloudfront_origin_request_policy" "api" {
+  name = "Managed-AllViewerExceptHostHeader"
+}
+
 data "aws_cloudfront_response_headers_policy" "seguridad" {
   name = "Managed-SecurityHeadersPolicy"
 }
@@ -131,12 +144,30 @@ resource "aws_cloudfront_distribution" "frontend" {
   is_ipv6_enabled     = true
   default_root_object = "index.html"
   price_class         = "PriceClass_All"
-  comment             = "${local.name} frontend"
+  comment             = "${local.name} frontend y API"
 
   origin {
     origin_id                = "frontend-s3"
     domain_name              = aws_s3_bucket.frontend.bucket_regional_domain_name
     origin_access_control_id = aws_cloudfront_origin_access_control.frontend.id
+  }
+
+  origin {
+    origin_id   = "api-alb"
+    domain_name = aws_lb.main.dns_name
+
+    custom_header {
+      name  = "X-Origen-CloudFront"
+      value = random_password.origen_cloudfront.result
+    }
+
+    custom_origin_config {
+      http_port              = 80
+      https_port             = 443
+      origin_protocol_policy = "http-only"
+      origin_ssl_protocols   = ["TLSv1.2"]
+      origin_read_timeout    = 60
+    }
   }
 
   default_cache_behavior {
@@ -152,6 +183,18 @@ resource "aws_cloudfront_distribution" "frontend" {
       event_type   = "viewer-request"
       function_arn = aws_cloudfront_function.spa.arn
     }
+  }
+
+  ordered_cache_behavior {
+    path_pattern               = "/api/*"
+    target_origin_id           = "api-alb"
+    viewer_protocol_policy     = "https-only"
+    allowed_methods            = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"]
+    cached_methods             = ["GET", "HEAD"]
+    compress                   = true
+    cache_policy_id            = data.aws_cloudfront_cache_policy.sin_cache.id
+    origin_request_policy_id   = data.aws_cloudfront_origin_request_policy.api.id
+    response_headers_policy_id = data.aws_cloudfront_response_headers_policy.seguridad.id
   }
 
   restrictions {
