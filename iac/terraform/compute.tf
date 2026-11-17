@@ -52,6 +52,24 @@ resource "aws_iam_role_policy" "web" {
         Resource = aws_db_instance.main.master_user_secret[0].secret_arn
       },
       {
+        Sid      = "TokenEcr"
+        Effect   = "Allow"
+        Action   = "ecr:GetAuthorizationToken"
+        Resource = "*"
+      },
+      {
+        Sid      = "ImagenBackend"
+        Effect   = "Allow"
+        Action   = ["ecr:BatchGetImage", "ecr:GetDownloadUrlForLayer", "ecr:BatchCheckLayerAvailability"]
+        Resource = aws_ecr_repository.backend.arn
+      },
+      {
+        Sid      = "ParametrosBackend"
+        Effect   = "Allow"
+        Action   = "ssm:GetParameter"
+        Resource = [aws_ssm_parameter.jwt.arn, aws_ssm_parameter.imagen_backend.arn]
+      },
+      {
         Sid      = "Cifrado"
         Effect   = "Allow"
         Action   = ["kms:Decrypt", "kms:GenerateDataKey"]

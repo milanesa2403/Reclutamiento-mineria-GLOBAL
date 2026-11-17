@@ -31,7 +31,7 @@ variable "vpc_cidr" {
 variable "instance_type" {
   description = "Tipo de instancia EC2"
   type        = string
-  default     = "t3.micro"
+  default     = "t3.small"
 }
 
 variable "asg_min_size" {
