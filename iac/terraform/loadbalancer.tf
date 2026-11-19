@@ -127,3 +127,7 @@ resource "aws_lb_listener_rule" "desde_cloudfront" {
     }
   }
 }
+
+output "alb_dns" {
+  value = aws_lb.main.dns_name
+}
