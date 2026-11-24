@@ -2,12 +2,8 @@ resource "aws_cognito_user_pool" "main" {
   name                     = "${local.name}-usuarios"
   username_attributes      = ["email"]
   auto_verified_attributes = ["email"]
-  mfa_configuration        = "ON"
+  mfa_configuration        = "OFF"
   deletion_protection      = "INACTIVE"
-
-  software_token_mfa_configuration {
-    enabled = true
-  }
 
   password_policy {
     minimum_length                   = 12
