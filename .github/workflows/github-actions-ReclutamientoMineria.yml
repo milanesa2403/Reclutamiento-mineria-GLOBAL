@@ -23,9 +23,17 @@ jobs:
             - uses: actions/setup-java@v4
               with:
                   distribution: temurin
-                  java-version: '17'
+                  java-version: '21'
                   cache: maven
-            - run: mvn -B -f backend/pom.xml verify
+            - run: mvn -B -f backend/pom.xml org.jacoco:jacoco-maven-plugin:0.8.12:prepare-agent verify org.jacoco:jacoco-maven-plugin:0.8.12:report
+            - name: Cobertura minima de 70 %
+              run: |
+                  awk -F, 'NR>1 {f+=$8; c+=$9} END {p=(c*100)/(f+c); printf "Cobertura de lineas: %.2f %%\n", p; if (p < 70) exit 1}' backend/target/site/jacoco/jacoco.csv
+            - uses: actions/upload-artifact@v4
+              if: always()
+              with:
+                  name: cobertura-backend
+                  path: backend/target/site/jacoco
 
     Construir-Frontend:
         runs-on: ubuntu-latest
@@ -33,9 +41,15 @@ jobs:
             - uses: actions/checkout@v4
             - uses: actions/setup-node@v4
               with:
-                  node-version: '20'
-            - run: npm install --prefix frontend
+                  node-version: '22'
+            - run: npm ci --prefix frontend
             - run: npm run build --prefix frontend
+              env:
+                  VITE_API_URL: ''
+            - uses: actions/upload-artifact@v4
+              with:
+                  name: frontend-dist
+                  path: frontend/dist
 
     Validar-Infraestructura:
         runs-on: ubuntu-latest
