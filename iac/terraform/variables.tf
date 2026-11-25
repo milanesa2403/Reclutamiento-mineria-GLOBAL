@@ -131,3 +131,15 @@ variable "waf_rate_limit" {
   type        = number
   default     = 300
 }
+
+variable "dominio" {
+  description = "Dominio propio del DNS gratuito, por ejemplo minero-g3.mooo.com; vacio usa la direccion de CloudFront"
+  type        = string
+  default     = ""
+}
+
+variable "certificados_validados" {
+  description = "Poner en true cuando los CNAME de validacion de ACM ya esten creados en el DNS gratuito"
+  type        = bool
+  default     = false
+}
