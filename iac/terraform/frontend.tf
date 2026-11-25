@@ -144,6 +144,8 @@ data "aws_cloudfront_response_headers_policy" "seguridad" {
 resource "aws_cloudfront_distribution" "frontend" {
   #checkov:skip=CKV_AWS_68:El WAF ya protege al balanceador, por donde pasan todas las llamadas a la API. La pagina solo entrega archivos fijos
   #checkov:skip=CKV_AWS_86:Los registros de acceso necesitan ACL en el bucket de registros, que estan desactivadas por seguridad. El ALB ya guarda los registros de la API
+  #checkov:skip=CKV_AWS_174:Mientras no se configura el dominio gratuito se usa el certificado de CloudFront. Con dominio se exige TLS 1.2
+  #checkov:skip=CKV2_AWS_42:El certificado de ACM se activa cuando se configura el dominio gratuito
   #checkov:skip=CKV_AWS_310:Hay un solo bucket de la pagina. Si falla se vuelve a subir desde el codigo
   #checkov:skip=CKV_AWS_374:La plataforma es internacional, asi que no se bloquean paises
   #checkov:skip=CKV2_AWS_47:El WAF con las reglas contra Log4j esta en el balanceador, delante del backend Java
@@ -152,6 +154,7 @@ resource "aws_cloudfront_distribution" "frontend" {
   default_root_object = "index.html"
   price_class         = "PriceClass_All"
   comment             = "${local.name} frontend y API"
+  aliases             = local.dominio_listo ? [var.dominio] : []
 
   origin {
     origin_id                = "frontend-s3"
@@ -161,7 +164,7 @@ resource "aws_cloudfront_distribution" "frontend" {
 
   origin {
     origin_id   = "api-alb"
-    domain_name = aws_lb.main.dns_name
+    domain_name = local.dominio_listo ? local.dominio_api : aws_lb.main.dns_name
 
     custom_header {
       name  = "X-Origen-CloudFront"
@@ -171,7 +174,7 @@ resource "aws_cloudfront_distribution" "frontend" {
     custom_origin_config {
       http_port              = 80
       https_port             = 443
-      origin_protocol_policy = "http-only"
+      origin_protocol_policy = local.dominio_listo ? "https-only" : "http-only"
       origin_ssl_protocols   = ["TLSv1.2"]
       origin_read_timeout    = 60
     }
@@ -211,7 +214,10 @@ resource "aws_cloudfront_distribution" "frontend" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = true
+    cloudfront_default_certificate = !local.dominio_listo
+    acm_certificate_arn            = local.dominio_listo ? aws_acm_certificate_validation.cloudfront[0].certificate_arn : null
+    ssl_support_method             = local.dominio_listo ? "sni-only" : null
+    minimum_protocol_version       = local.dominio_listo ? "TLSv1.2_2021" : "TLSv1"
   }
 }
 

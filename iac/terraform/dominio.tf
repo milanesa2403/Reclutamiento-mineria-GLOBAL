@@ -25,3 +25,14 @@ resource "aws_acm_certificate" "api" {
     create_before_destroy = true
   }
 }
+
+resource "aws_acm_certificate_validation" "cloudfront" {
+  provider        = aws.us_east_1
+  count           = local.dominio_listo ? 1 : 0
+  certificate_arn = aws_acm_certificate.cloudfront[0].arn
+}
+
+resource "aws_acm_certificate_validation" "api" {
+  count           = local.dominio_listo ? 1 : 0
+  certificate_arn = aws_acm_certificate.api[0].arn
+}
