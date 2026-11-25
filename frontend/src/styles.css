@@ -1,0 +1,28 @@
+:root { --fondo:#f4f1ea; --tarjeta:#fff; --tinta:#2b2a27; --acento:#c4731c; --acento2:#7a4510; --borde:#ddd6c8; --ok:#2e7d32; --mal:#b3261e; }
+@media (prefers-color-scheme: dark) { :root { --fondo:#1d1c19; --tarjeta:#2a2925; --tinta:#eee9de; --borde:#44413a; } }
+* { box-sizing: border-box; }
+body { margin:0; font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; background:var(--fondo); color:var(--tinta); }
+header { display:flex; justify-content:space-between; align-items:center; padding:.8rem 1.5rem; background:var(--acento2); color:#fff; flex-wrap:wrap; gap:.5rem; }
+header h1 { font-size:1.2rem; margin:0; }
+main { max-width:900px; margin:1.5rem auto; padding:0 1rem; display:grid; gap:1rem; }
+.tarjeta { background:var(--tarjeta); border:1px solid var(--borde); border-radius:10px; padding:1rem 1.25rem; display:grid; gap:.7rem; }
+.estrecha { max-width:420px; margin:2rem auto; width:100%; }
+h2 { margin:0; font-size:1.1rem; }
+label { display:grid; gap:.25rem; font-size:.85rem; }
+label.check { display:flex; gap:.5rem; align-items:flex-start; }
+input, select, textarea { font:inherit; padding:.5rem; border:1px solid var(--borde); border-radius:6px; background:var(--fondo); color:var(--tinta); width:100%; }
+input[type=checkbox] { width:auto; }
+button { font:inherit; padding:.5rem 1rem; border:0; border-radius:6px; background:var(--acento); color:#fff; cursor:pointer; }
+button.sec { background:transparent; color:var(--acento); border:1px solid var(--acento); }
+button:disabled { opacity:.5; cursor:not-allowed; }
+header button { background:#fff3; margin-left:.5rem; }
+.fila { display:flex; gap:.6rem; flex-wrap:wrap; } .fila > * { flex:1; min-width:120px; }
+.item { display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:.7rem 0; border-top:1px solid var(--borde); }
+.item small { display:block; opacity:.7; } .item p { margin:.2rem 0 0; font-size:.9rem; }
+.acciones { display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; }
+.etiqueta { background:var(--fondo); border:1px solid var(--borde); border-radius:99px; padding:.15rem .6rem; font-size:.75rem; }
+.error { color:var(--mal); margin:0; } .ok { color:var(--ok); margin:0; } .vacio { opacity:.6; margin:0; }
+.enlace { color:var(--acento); cursor:pointer; text-align:center; margin:0; }
+.tabla { overflow-x:auto; } table { border-collapse:collapse; width:100%; font-size:.8rem; }
+th, td { text-align:left; padding:.3rem .5rem; border-bottom:1px solid var(--borde); white-space:nowrap; }
+tr.negado td { color:var(--mal); }

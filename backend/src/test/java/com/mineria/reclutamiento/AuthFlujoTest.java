@@ -42,7 +42,7 @@ class AuthFlujoTest {
     @Test
     void noSePuedeRegistrarAdministrador() throws Exception {
         String body = "{\"correo\":\"x@y.com\",\"clave\":\"ClaveSegura123!\",\"rol\":\"ADMINISTRADOR\","
-                + "\"nombre\":\"X\",\"pais\":\"PE\",\"idioma\":\"es\"}";
+                + "\"nombre\":\"X\",\"pais\":\"PE\",\"idioma\":\"es\",\"consentimiento\":true}";
         mvc.perform(post("/v1/auth/registro").contentType(MediaType.APPLICATION_JSON).content(body))
             .andExpect(status().isForbidden());
     }

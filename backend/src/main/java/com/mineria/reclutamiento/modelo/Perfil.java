@@ -30,4 +30,9 @@ public class Perfil {
     public String getIdioma() { return idioma; }
     public String getEspecialidad() { return especialidad; }
     public int getAniosExperiencia() { return aniosExperiencia; }
+    public void setNombreCompleto(String v) { this.nombreCompleto = v; }
+    public void setPais(String v) { this.pais = v; }
+    public void setIdioma(String v) { this.idioma = v; }
+    public void setEspecialidad(String v) { this.especialidad = v; }
+    public void setAniosExperiencia(int v) { this.aniosExperiencia = v; }
 }

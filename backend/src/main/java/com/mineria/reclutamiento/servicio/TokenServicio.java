@@ -15,10 +15,11 @@ public class TokenServicio {
 
     public String generar(Usuario u) {
         Instant ahora = Instant.now();
+        long minutos=0;
         JwtClaimsSet claims = JwtClaimsSet.builder()
                 .subject(u.getId().toString())
                 .issuedAt(ahora)
-                .expiresAt(ahora.plus(1, ChronoUnit.HOURS))
+                .expiresAt(ahora.plus(minutos, ChronoUnit.MINUTES))
                 .claim("rol", u.getRol().name())
                 .build();
         JwsHeader header = JwsHeader.with(MacAlgorithm.HS256).build();

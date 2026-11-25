@@ -36,18 +36,23 @@ locals {
               "sns.amazonaws.com",
               "cloudwatch.amazonaws.com",
               "events.amazonaws.com",
-              "cloudtrail.amazonaws.com"
+              "cloudtrail.amazonaws.com",
+              "sqs.amazonaws.com"
             ]
           }
           Action   = ["kms:Decrypt", "kms:GenerateDataKey*", "kms:DescribeKey"]
           Resource = "*"
         },
         {
-          Sid       = "ColaCv"
+          Sid       = "CloudFrontPagina"
           Effect    = "Allow"
-          Principal = { Service = "sqs.amazonaws.com" }
-          Action    = ["kms:Decrypt", "kms:GenerateDataKey*", "kms:DescribeKey"]
+          Principal = { Service = "cloudfront.amazonaws.com" }
+          Action    = ["kms:Decrypt"]
           Resource  = "*"
+          Condition = {
+            StringEquals = { "aws:SourceAccount" = local.account_id }
+            ArnLike      = { "aws:SourceArn" = "arn:aws:cloudfront::${local.account_id}:distribution/*" }
+          }
         },
         {
           Sid       = "VolumenesAutoScaling"

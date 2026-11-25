@@ -2,6 +2,7 @@ package com.mineria.reclutamiento.servicio;
 
 import com.mineria.reclutamiento.excepcion.AccesoDenegadoException;
 import com.mineria.reclutamiento.modelo.*;
+import com.mineria.reclutamiento.util.EstandaresIso;
 import com.mineria.reclutamiento.repositorio.*;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -36,17 +37,21 @@ public class AutenticacionServicioImpl implements AutenticacionServicio {
 
     @Override
     @Transactional
-    public Usuario registrar(String correo, String clave, Rol rol, String nombre, String pais, String idioma) {
+    public Usuario registrar(String correo, String clave, Rol rol, String nombre, String pais, String idioma, boolean consentimiento) {
         if (rol == Rol.ADMINISTRADOR) throw new AccesoDenegadoException("No se puede registrar un administrador");
+        if (!consentimiento) throw new IllegalArgumentException("Debe aceptar el tratamiento de datos personales (Ley 29733 / RGPD)");
+        String paisIso = EstandaresIso.pais(pais);
+        String idiomaIso = EstandaresIso.idioma(idioma);
         if (clave == null || clave.length() < 12) throw new IllegalArgumentException("La clave debe tener al menos 12 caracteres");
         String c = correo.trim().toLowerCase();
         if (usuarios.existsByCorreo(c)) throw new IllegalStateException("El correo ya esta registrado");
 
         Usuario u = new Usuario(UUID.randomUUID(), c, rol);
         u.setClaveHash(encoder.encode(clave));
+        u.setConsentimientoEn(Instant.now());
         usuarios.save(u);
-        if (rol == Rol.TRABAJADOR) perfiles.save(new Perfil(u.getId(), nombre, pais.toUpperCase(), idioma.toLowerCase()));
-        else empresas.save(new Empresa(UUID.randomUUID(), u.getId(), nombre, pais.toUpperCase()));
+        if (rol == Rol.TRABAJADOR) perfiles.save(new Perfil(u.getId(), nombre, paisIso, idiomaIso));
+        else empresas.save(new Empresa(UUID.randomUUID(), u.getId(), nombre, paisIso));
         auditoria.registrar(u.getId(), "REGISTRO", "usuario", true);
         return u;
     }

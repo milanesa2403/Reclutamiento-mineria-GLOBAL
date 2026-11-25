@@ -10,3 +10,9 @@ iac/terraform/.build/
 iac/terraform/backend.hcl
 result.xml
 target/
+
+# Backend / Frontend
+backend/target/
+backend/almacen/
+frontend/node_modules/
+frontend/dist/

@@ -15,6 +15,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -58,7 +59,9 @@ public class SeguridadConfig {
         http.csrf(c -> c.disable())
             .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(a -> a
-                .requestMatchers("/v1/auth/**").permitAll()
+                .requestMatchers("/v1/auth/**", "/api/health", "/v1/health", "/v0/**",
+                        "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+                .requestMatchers(HttpMethod.POST, "/v1/documentos").hasRole("TRABAJADOR")
                 .requestMatchers("/v1/trabajador/**").hasRole("TRABAJADOR")
                 .requestMatchers("/v1/empresa/**").hasRole("EMPRESA")
                 .requestMatchers("/v1/admin/**").hasRole("ADMINISTRADOR")
@@ -70,7 +73,7 @@ public class SeguridadConfig {
                 auditoria.registrar(id, "ACCESO_DENEGADO", req.getRequestURI(), false);
                 res.setStatus(403);
                 res.setContentType(MediaType.APPLICATION_JSON_VALUE);
-                res.getWriter().write("{\"error\":\"Acceso denegado\"}");
+                res.getWriter().write("{\"codigo\":\"ACCESO_DENEGADO\",\"mensaje\":\"Acceso denegado\"}");
             }));
         return http.build();
     }

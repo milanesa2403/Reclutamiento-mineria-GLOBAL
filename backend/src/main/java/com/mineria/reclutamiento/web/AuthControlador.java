@@ -20,7 +20,8 @@ public class AuthControlador {
             @NotNull Rol rol,
             @NotBlank String nombre,
             @NotBlank @Size(min = 2, max = 2, message = "El pais debe ser ISO 3166-1 (2 letras)") String pais,
-            @NotBlank @Size(min = 2, max = 2, message = "El idioma debe ser ISO 639-1 (2 letras)") String idioma) {}
+            @NotBlank @Size(min = 2, max = 2, message = "El idioma debe ser ISO 639-1 (2 letras)") String idioma,
+            @AssertTrue(message = "Debe aceptar el tratamiento de datos personales") boolean consentimiento) {}
 
     public record LoginPeticion(@NotBlank String correo, @NotBlank String clave, String codigoTotp) {}
 
@@ -34,7 +35,7 @@ public class AuthControlador {
 
     @PostMapping("/registro")
     public ResponseEntity<Map<String, Object>> registro(@Valid @RequestBody RegistroPeticion p) {
-        Usuario u = auth.registrar(p.correo(), p.clave(), p.rol(), p.nombre(), p.pais(), p.idioma());
+        Usuario u = auth.registrar(p.correo(), p.clave(), p.rol(), p.nombre(), p.pais(), p.idioma(), p.consentimiento());
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(Map.of("id", u.getId(), "correo", u.getCorreo(), "rol", u.getRol()));
     }

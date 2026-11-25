@@ -1,0 +1,12 @@
+plugin: amazon.aws.aws_ec2
+regions:
+  - us-east-2
+filters:
+  tag:Name: minero-dev-web
+  instance-state-name: running
+hostnames:
+  - instance-id
+compose:
+  ansible_host: instance_id
+groups:
+  web: true

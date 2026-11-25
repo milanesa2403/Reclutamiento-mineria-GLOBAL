@@ -18,6 +18,8 @@ public class Usuario {
     private boolean segundoFactorActivo;
     private int intentosFallidos;
     private Instant bloqueadoHasta;
+    private Instant consentimientoEn;
+    private Instant borradoSolicitadoEn;
 
     protected Usuario() {}
 
@@ -37,4 +39,8 @@ public class Usuario {
     public void setIntentosFallidos(int n) { this.intentosFallidos = n; }
     public Instant getBloqueadoHasta() { return bloqueadoHasta; }
     public void setBloqueadoHasta(Instant t) { this.bloqueadoHasta = t; }
+    public Instant getConsentimientoEn() { return consentimientoEn; }
+    public void setConsentimientoEn(Instant t) { this.consentimientoEn = t; }
+    public Instant getBorradoSolicitadoEn() { return borradoSolicitadoEn; }
+    public void setBorradoSolicitadoEn(Instant t) { this.borradoSolicitadoEn = t; }
 }
