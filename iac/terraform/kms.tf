@@ -36,7 +36,8 @@ locals {
               "sns.amazonaws.com",
               "cloudwatch.amazonaws.com",
               "events.amazonaws.com",
-              "cloudtrail.amazonaws.com"
+              "cloudtrail.amazonaws.com",
+              "sqs.amazonaws.com"
             ]
           }
           Action   = ["kms:Decrypt", "kms:GenerateDataKey*", "kms:DescribeKey"]
