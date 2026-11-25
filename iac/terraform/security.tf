@@ -79,59 +79,7 @@ resource "aws_security_group" "db" {
     security_groups = [aws_security_group.web.id]
   }
 
-  ingress {
-    description     = "PostgreSQL desde la Lambda de CV"
-    from_port       = 5432
-    to_port         = 5432
-    protocol        = "tcp"
-    security_groups = [aws_security_group.lambda.id]
-  }
-
   tags = {
     Name = "${local.name}-db-sg"
-  }
-}
-
-resource "aws_security_group" "lambda" {
-  name        = "${local.name}-lambda-sg"
-  description = "Lambda que registra los CV en RDS"
-  vpc_id      = aws_vpc.main.id
-
-  egress {
-    description = "PostgreSQL hacia las subredes privadas"
-    from_port   = 5432
-    to_port     = 5432
-    protocol    = "tcp"
-    cidr_blocks = aws_subnet.private[*].cidr_block
-  }
-
-  egress {
-    description = "HTTPS hacia los endpoints de la VPC"
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = [var.vpc_cidr]
-  }
-
-  tags = {
-    Name = "${local.name}-lambda-sg"
-  }
-}
-
-resource "aws_security_group" "endpoints" {
-  name        = "${local.name}-endpoints-sg"
-  description = "Endpoints privados de la VPC"
-  vpc_id      = aws_vpc.main.id
-
-  ingress {
-    description     = "HTTPS desde la Lambda"
-    from_port       = 443
-    to_port         = 443
-    protocol        = "tcp"
-    security_groups = [aws_security_group.lambda.id]
-  }
-
-  tags = {
-    Name = "${local.name}-endpoints-sg"
   }
 }

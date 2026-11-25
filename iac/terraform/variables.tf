@@ -131,9 +131,3 @@ variable "waf_rate_limit" {
   type        = number
   default     = 300
 }
-
-variable "restaurar_bd" {
-  description = "Crea la base restaurada en la zona B desde el ultimo respaldo y conecta la API a ella"
-  type        = bool
-  default     = false
-}
