@@ -43,6 +43,13 @@ locals {
           Resource = "*"
         },
         {
+          Sid       = "ColaCv"
+          Effect    = "Allow"
+          Principal = { Service = "sqs.amazonaws.com" }
+          Action    = ["kms:Decrypt", "kms:GenerateDataKey*", "kms:DescribeKey"]
+          Resource  = "*"
+        },
+        {
           Sid       = "VolumenesAutoScaling"
           Effect    = "Allow"
           Principal = { AWS = "*" }
