@@ -45,8 +45,17 @@
         "secretsmanager:*",
         "acm:*",
         "wafv2:*",
+        "ecr:*",
+        "sqs:*",
+        "lambda:*",
         "ssm:GetParameter",
-        "ssm:GetParameters"
+        "ssm:GetParameters",
+        "ssm:PutParameter",
+        "ssm:DeleteParameter",
+        "ssm:DescribeParameters",
+        "ssm:AddTagsToResource",
+        "ssm:ListTagsForResource",
+        "cognito-idp:*"
       ],
       "Resource": "*",
       "Condition": {
@@ -57,6 +66,12 @@
           ]
         }
       }
+    },
+    {
+      "Sid": "CloudFrontGlobal",
+      "Effect": "Allow",
+      "Action": "cloudfront:*",
+      "Resource": "*"
     },
     {
       "Sid": "Lectura",
