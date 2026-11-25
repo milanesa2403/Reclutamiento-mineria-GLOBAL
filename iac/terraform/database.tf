@@ -69,7 +69,7 @@ resource "aws_cloudwatch_log_group" "rds" {
 
 # CKV_AWS_293: la base de datos se podia borrar por error
 resource "aws_db_instance" "main" {
-  #checkov:skip=CKV_AWS_157:Una sola zona por la capa gratuita; si falla se restaura desde el respaldo en la zona B en maximo 30 minutos
+  #checkov:skip=CKV_AWS_157:Una sola zona por la capa gratuita; si falla se restaura desde el respaldo en la zona B
   identifier                            = "${local.name}-postgres"
   availability_zone                     = local.azs[0]
   engine                                = "postgres"
