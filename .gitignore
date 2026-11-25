@@ -6,6 +6,7 @@
 .idea/
 .terraform/
 crash.log
+iac/terraform/.build/
 iac/terraform/backend.hcl
 result.xml
 target/

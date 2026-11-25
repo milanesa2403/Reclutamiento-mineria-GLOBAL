@@ -71,6 +71,7 @@ resource "aws_cloudwatch_log_group" "rds" {
 resource "aws_db_instance" "main" {
   #checkov:skip=CKV_AWS_157:Una sola zona por la capa gratuita; si falla se restaura desde el respaldo en la zona B en maximo 30 minutos
   identifier                            = "${local.name}-postgres"
+  availability_zone                     = local.azs[0]
   engine                                = "postgres"
   engine_version                        = var.db_engine_version
   instance_class                        = var.db_instance_class
@@ -89,7 +90,7 @@ resource "aws_db_instance" "main" {
   parameter_group_name                  = aws_db_parameter_group.main.name
   publicly_accessible                   = false
   backup_retention_period               = var.db_backup_days
-  backup_window                         = "07:00-08:00"
+  backup_window                         = "03:00-04:00"
   maintenance_window                    = "sun:08:30-sun:09:30"
   copy_tags_to_snapshot                 = true
   deletion_protection                   = var.db_deletion_protection
@@ -110,4 +111,53 @@ resource "aws_db_instance" "main" {
   }
 
   depends_on = [aws_cloudwatch_log_group.rds]
+}
+
+resource "aws_db_instance" "restaurada" {
+  #checkov:skip=CKV_AWS_157:Es la copia de recuperacion en la otra zona que se crea solo cuando falla la principal
+  count                                 = var.restaurar_bd ? 1 : 0
+  identifier                            = "${local.name}-postgres-restaurada"
+  instance_class                        = var.db_instance_class
+  availability_zone                     = local.azs[1]
+  storage_type                          = "gp3"
+  storage_encrypted                     = true
+  kms_key_id                            = aws_kms_key.main.arn
+  manage_master_user_password           = true
+  master_user_secret_kms_key_id         = aws_kms_key.main.arn
+  multi_az                              = false
+  db_subnet_group_name                  = aws_db_subnet_group.main.name
+  vpc_security_group_ids                = [aws_security_group.db.id]
+  parameter_group_name                  = aws_db_parameter_group.main.name
+  publicly_accessible                   = false
+  backup_retention_period               = var.db_backup_days
+  backup_window                         = "03:00-04:00"
+  copy_tags_to_snapshot                 = true
+  deletion_protection                   = false
+  skip_final_snapshot                   = true
+  iam_database_authentication_enabled   = true
+  auto_minor_version_upgrade            = true
+  performance_insights_enabled          = true
+  performance_insights_kms_key_id       = aws_kms_key.main.arn
+  performance_insights_retention_period = 7
+  monitoring_interval                   = 60
+  monitoring_role_arn                   = aws_iam_role.rds_monitoring.arn
+  enabled_cloudwatch_logs_exports       = ["postgresql", "upgrade"]
+  ca_cert_identifier                    = "rds-ca-rsa2048-g1"
+
+  restore_to_point_in_time {
+    source_db_instance_identifier = aws_db_instance.main.identifier
+    use_latest_restorable_time    = true
+  }
+
+  tags = {
+    Name = "${local.name}-postgres-restaurada"
+  }
+}
+
+locals {
+  db_activa = var.restaurar_bd ? aws_db_instance.restaurada[0] : aws_db_instance.main
+}
+
+output "rds_activa" {
+  value = local.db_activa.address
 }
