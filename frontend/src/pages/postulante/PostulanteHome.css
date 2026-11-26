@@ -1,0 +1,22 @@
+
+
+.postulante-panel-layout {
+    width: 100%;
+    min-height: calc(100vh - 70px);
+    background: #f5f7f9;
+}
+
+
+.postulante-panel-contenido {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 35px 1.5rem 60px;
+}
+
+
+@media (max-width: 650px) {
+    .postulante-panel-contenido {
+        padding: 24px 16px 40px;
+    }
+}

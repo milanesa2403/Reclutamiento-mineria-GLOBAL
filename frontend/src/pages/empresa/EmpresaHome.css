@@ -1,0 +1,739 @@
+
+.empresa-panel-layout {
+    width: 100%;
+    min-height: calc(100vh - 64px);
+
+    display: flex;
+
+    background: #f4f6f8;
+}
+
+.empresa-panel-contenido {
+    min-width: 0;
+    flex: 1;
+
+    padding: 20px 22px 28px;
+    box-sizing: border-box;
+
+    background: #f4f6f8;
+}
+
+
+
+.empresa-sidebar {
+    width: 220px;
+    min-width: 220px;
+    min-height: calc(100vh - 64px);
+
+    padding: 22px 14px 14px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+
+    color: #ffffff;
+
+    background: linear-gradient(
+            180deg,
+            #102b4e 0%,
+            #12385f 100%
+    );
+}
+
+.empresa-sidebar-header {
+    padding: 0 9px 18px;
+}
+
+.empresa-sidebar-mini {
+    display: block;
+    margin-bottom: 5px;
+
+    color: #ff7a3b;
+
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.7px;
+}
+
+.empresa-sidebar-header h2 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.empresa-sidebar-header p {
+    margin: 5px 0 0;
+
+    color: #aebfd0;
+
+    font-size: 11px;
+    line-height: 1.45;
+}
+
+
+
+.empresa-sidebar-nav {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.empresa-sidebar-link {
+    width: 100%;
+    min-height: 42px;
+
+    padding: 0 11px;
+
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    color: #c8d5e0;
+    background: transparent;
+
+    border: none;
+    border-radius: 6px;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.empresa-sidebar-link:hover {
+    color: #ffffff;
+
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.empresa-sidebar-link.activo {
+    color: #ffffff;
+    background: #ff641e;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+.empresa-sidebar-divider {
+    height: 1px;
+
+    margin: 8px 7px;
+
+    background: rgba(255, 255, 255, 0.11);
+}
+
+.empresa-sidebar-logout {
+    margin-top: 0;
+}
+
+.empresa-sidebar-logout:hover {
+    color: #ffffff;
+
+    background: rgba(255, 100, 30, 0.18);
+}
+
+
+
+.empresa-sidebar-frase {
+    margin-top: auto;
+
+    padding: 12px 11px 7px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.empresa-sidebar-frase span {
+    display: block;
+
+    height: 15px;
+    margin-bottom: 3px;
+
+    color: #ff641e;
+
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.empresa-sidebar-frase p {
+    margin: 0;
+
+    color: #b8c7d5;
+
+    font-size: 11px;
+    font-style: italic;
+    line-height: 1.4;
+}
+
+
+
+.empresa-home-header {
+    min-height: 62px;
+
+    display: flex;
+    align-items: center;
+}
+
+.empresa-home-header span {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #ff641e;
+
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.7px;
+}
+
+.empresa-home-header h1 {
+    margin: 0;
+
+    color: #102b4e;
+
+    font-size: 24px;
+    font-weight: 900;
+}
+
+.empresa-home-header p {
+    margin: 4px 0 0;
+
+    color: #6b8092;
+
+    font-size: 12px;
+}
+
+
+
+.empresa-home-bienvenida {
+    min-height: 165px;
+
+    margin-top: 10px;
+    padding: 28px 32px;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+
+    background:
+            radial-gradient(
+                    circle at 92% 15%,
+                    rgba(255, 128, 68, 0.20) 0%,
+                    rgba(255, 128, 68, 0) 25%
+            ),
+            linear-gradient(
+                    110deg,
+                    #173c60 0%,
+                    #245579 58%,
+                    #2e6587 100%
+            );
+
+    border-radius: 12px;
+
+    box-shadow: 0 5px 15px rgba(16, 43, 78, 0.12);
+}
+
+.empresa-bienvenida-contenido {
+    max-width: 700px;
+}
+
+.empresa-bienvenida-mini {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #ff9a6b;
+
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.8px;
+}
+
+.empresa-home-bienvenida h2 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 27px;
+    font-weight: 700;
+}
+
+.empresa-home-bienvenida h2 strong {
+    font-size: 29px;
+    font-weight: 900;
+}
+
+.empresa-home-bienvenida p {
+    max-width: 650px;
+
+    margin: 10px 0 15px;
+
+    color: #d9e5ee;
+
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.empresa-bienvenida-boton {
+    padding: 9px 13px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.10);
+
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 6px;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.empresa-bienvenida-boton:hover {
+    background: #ff641e;
+    border-color: #ff641e;
+}
+
+
+
+.empresa-estadisticas-grid {
+    margin-top: 14px;
+
+    display: grid;
+
+    grid-template-columns: repeat(
+        4,
+        minmax(0, 1fr)
+    );
+
+    gap: 12px;
+}
+
+.empresa-estadistica-card {
+    min-height: 96px;
+
+    padding: 15px;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    background: #ffffff;
+
+    border: 1px solid #dfe6eb;
+    border-radius: 9px;
+
+    box-shadow: 0 2px 7px rgba(16, 43, 78, 0.04);
+}
+
+.empresa-estadistica-icono {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #ff641e;
+    background: #fff0e8;
+
+    border-radius: 8px;
+}
+
+.empresa-estadistica-card strong {
+    display: block;
+
+    color: #102b4e;
+
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.empresa-estadistica-card span {
+    display: block;
+
+    margin-top: 6px;
+
+    color: #697e90;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.empresa-estadistica-accion {
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.empresa-estadistica-accion:hover {
+    border-color: #ffb28e;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 5px 12px rgba(16, 43, 78, 0.08);
+}
+
+.empresa-estadistica-card .empresa-accion-titulo {
+    margin: 0;
+
+    font-size: 16px;
+}
+
+
+
+.empresa-home-card {
+    margin-top: 14px;
+
+    padding: 20px 22px;
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 1px solid #dfe6eb;
+    border-radius: 10px;
+
+    box-shadow: 0 2px 7px rgba(16, 43, 78, 0.04);
+}
+
+.empresa-seccion-titulo {
+    margin-bottom: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+.empresa-seccion-titulo span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #ff641e;
+
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+}
+
+.empresa-seccion-titulo h2 {
+    margin: 0;
+
+    color: #102b4e;
+
+    font-size: 20px;
+    font-weight: 900;
+}
+
+
+
+.empresa-porcentaje {
+    color: #ff641e;
+
+    font-size: 23px;
+    font-weight: 900;
+}
+
+.empresa-progreso {
+    width: 100%;
+    height: 7px;
+
+    overflow: hidden;
+
+    background: #e8edf1;
+
+    border-radius: 10px;
+}
+
+.empresa-progreso-barra {
+    height: 100%;
+
+    background: linear-gradient(
+            90deg,
+            #ff641e,
+            #ff8c55
+    );
+
+    border-radius: 10px;
+}
+
+.empresa-perfil-estado-contenido {
+    margin-top: 17px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(300px, 0.7fr);
+
+    gap: 22px;
+}
+
+
+
+.empresa-checklist {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 13px 20px;
+}
+
+.empresa-checklist div {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    color: #526b80;
+
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.empresa-checklist svg {
+    flex-shrink: 0;
+
+    color: #24a75d;
+}
+
+.empresa-checklist .pendiente svg {
+    color: #d18b20;
+}
+
+
+
+.empresa-beneficio {
+    min-height: 70px;
+
+    padding: 14px 16px;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    color: #102b4e;
+    background: #f7f9fb;
+
+    border: 1px solid #e1e7ec;
+    border-radius: 8px;
+}
+
+.empresa-beneficio > svg {
+    flex-shrink: 0;
+
+    color: #ff641e;
+}
+
+.empresa-beneficio strong {
+    display: block;
+
+    color: #102b4e;
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.empresa-beneficio p {
+    margin: 5px 0 0;
+
+    color: #718496;
+
+    font-size: 11px;
+    line-height: 1.45;
+}
+
+
+
+.empresa-boton-secundario {
+    margin-top: 15px;
+
+    padding: 9px 13px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    color: #ff641e;
+    background: #ffffff;
+
+    border: 1px solid #ffc4a8;
+    border-radius: 6px;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.empresa-boton-secundario:hover {
+    color: #ffffff;
+    background: #ff641e;
+
+    border-color: #ff641e;
+}
+
+
+
+.empresa-ver-todas {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    color: #ff641e;
+    background: transparent;
+
+    border: none;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+.empresa-postulantes {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    font-size: 11px;
+}
+
+.empresa-postulantes svg {
+    color: #59758c;
+}
+
+
+
+@media (max-width: 1050px) {
+
+    .empresa-estadisticas-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .empresa-perfil-estado-contenido {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 800px) {
+
+    .empresa-sidebar {
+        width: 185px;
+        min-width: 185px;
+    }
+
+    .empresa-panel-contenido {
+        padding: 16px;
+    }
+}
+
+
+@media (max-width: 650px) {
+
+    .empresa-panel-layout {
+        flex-direction: column;
+    }
+
+    .empresa-sidebar {
+        width: 100%;
+        min-width: 100%;
+        min-height: auto;
+    }
+
+    .empresa-sidebar-frase {
+        display: none;
+    }
+
+    .empresa-estadisticas-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .empresa-checklist {
+        grid-template-columns: 1fr;
+    }
+
+    .empresa-home-bienvenida {
+        padding: 22px;
+    }
+
+    .empresa-home-bienvenida h2,
+    .empresa-home-bienvenida h2 strong {
+        font-size: 23px;
+    }
+}
+.empresa-proximamente {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 18px 20px;
+    border: 1px dashed #d1d5db;
+    border-radius: 10px;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.empresa-activas-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.empresa-activas-lista li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 18px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+}
+
+.empresa-activas-lista li > div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.empresa-activas-lista strong {
+    color: #0f2640;
+    font-size: 14px;
+}
+
+.empresa-activas-lista span {
+    color: #6b7280;
+    font-size: 13px;
+}
