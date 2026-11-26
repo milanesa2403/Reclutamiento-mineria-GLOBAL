@@ -1,0 +1,35 @@
+services:
+  postgres-local:
+    image: postgres:16-alpine
+    container_name: mineria-postgres-local
+    environment:
+      POSTGRES_DB: reclutamiento
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres-local-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d reclutamiento"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  backend:
+    profiles: ["completo"]
+    build: .
+    container_name: mineria-backend-local
+    env_file: .env
+    environment:
+      DB_URL: jdbc:postgresql://postgres-local:5432/reclutamiento
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres-local:
+        condition: service_healthy
+
+volumes:
+  postgres-local-data:
