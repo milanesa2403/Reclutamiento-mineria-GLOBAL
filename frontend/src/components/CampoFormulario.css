@@ -1,0 +1,152 @@
+
+.perfil-form {
+    max-width: 42rem;
+}
+
+.perfil-form fieldset {
+    margin: 0 0 1.5rem;
+    padding: 1rem 1.1rem 1.1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--border-light);
+}
+
+.perfil-form legend {
+    padding: 0 0.4rem;
+    font-weight: 700;
+}
+
+.perfil-form fieldset > p.muted {
+    margin: 0 0 1rem;
+}
+
+.perfil-form .filas {
+    margin-bottom: 1rem;
+}
+
+.perfil-form .filas > .fila + .fila {
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.perfil-form .fila-cabecera {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.6rem;
+}
+
+.perfil-form .fila-cabecera h3 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.perfil-form .quitar {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--danger);
+    font: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.perfil-form .quitar:focus-visible,
+.perfil-form .chips button:focus-visible,
+.perfil-form .check input:focus-visible {
+    outline: 3px solid #f2c46d;
+    outline-offset: 2px;
+}
+
+.perfil-form .dos-columnas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: 0 1rem;
+}
+
+.perfil-form .check {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 1.1rem;
+    font-weight: 400;
+}
+
+.perfil-form .check input {
+    width: auto;
+    margin: 0;
+}
+
+.perfil-form .agregar-linea {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.perfil-form .agregar-linea .campo {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.perfil-form .agregar-linea .btn {
+    margin-top: 1.75rem;
+}
+
+.perfil-form .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.perfil-form .chips li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.1rem 0.25rem 0.1rem 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    background: var(--bg-app);
+}
+
+.perfil-form .chips button {
+    padding: 0.1rem 0.4rem;
+    border: 0;
+    background: none;
+    color: var(--text-muted);
+    font-size: 1.15rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.perfil-form .form-error {
+    margin: 0 0 1.25rem;
+    padding: 0.7rem 1rem;
+    border-left: 4px solid var(--danger);
+    background: var(--border-light);
+    color: var(--danger);
+}
+
+.perfil-form .form-error p {
+    margin: 0;
+}
+
+.perfil-form .form-error ul {
+    margin: 0.4rem 0 0;
+    padding-left: 1.2rem;
+}
+
+@media (max-width: 30rem) {
+    .perfil-form .agregar-linea {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .perfil-form .agregar-linea .btn {
+        margin-top: 0;
+    }
+}

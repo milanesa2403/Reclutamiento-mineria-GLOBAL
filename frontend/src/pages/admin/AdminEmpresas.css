@@ -1,0 +1,284 @@
+.admin-empresas__resumen {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    width: fit-content;
+}
+
+.admin-empresas__resumen strong {
+    font-size: 28px;
+    color: #ea6c0c;
+}
+
+.admin-empresas__resumen span {
+    color: #1b2a41;
+    font-size: 14px;
+}
+
+.admin-empresas__filtros {
+    display: flex;
+    gap: 12px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.admin-empresas__filtros input {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.admin-empresas__filtros select {
+    padding: 10px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 14px;
+    background: #fff;
+    color: #1b2a41;
+}
+
+.admin-empresas__tabla {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.admin-empresas__tabla th {
+    text-align: left;
+    font-size: 13px;
+    color: #6b7280;
+    font-weight: 600;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e5e7eb;
+    background: #f9fafb;
+}
+
+.admin-empresas__tabla td {
+    padding: 12px 16px;
+    font-size: 14px;
+    color: #1b2a41;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.admin-empresas__tabla tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.admin-empresas__estado {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.admin-empresas__estado.activa {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.admin-empresas__estado.inactiva {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.admin-empresas__tabla button {
+    background: #fff;
+    border: 1px solid #ea6c0c;
+    color: #ea6c0c;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.admin-empresas__tabla button:hover {
+    background: #ea6c0c;
+    color: #fff;
+}
+
+.admin-empresas__estado.pendiente {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.admin-empresas__detalle {
+    margin-top: 20px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 20px 24px;
+    color: #1b2a41;
+    font-size: 14px;
+}
+
+.admin-empresas__detalle h2 {
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.admin-empresas__detalle dl {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 6px 16px;
+    margin-bottom: 16px;
+}
+
+.admin-empresas__detalle dt {
+    color: #6b7280;
+    font-weight: 600;
+}
+
+.admin-empresas__detalle textarea {
+    width: 100%;
+    min-height: 70px;
+    padding: 8px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    font: inherit;
+    margin: 6px 0 12px;
+}
+
+.admin-empresas__acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.admin-empresas__acciones button {
+    background: #fff;
+    border: 1px solid #ea6c0c;
+    color: #ea6c0c;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.admin-empresas__acciones button.principal {
+    background: #ea6c0c;
+    color: #fff;
+}
+
+.admin-empresas__acciones button.peligro {
+    border-color: #dc2626;
+    color: #dc2626;
+}
+
+.admin-empresas__acciones button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.admin-empresas__mensaje {
+    margin-top: 12px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: #dcfce7;
+    color: #166534;
+}
+
+.admin-empresas__mensaje.error {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.admin-empresas__filtros {
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.admin-empresas__filtros label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.admin-empresas__filtros input[type='date'] {
+    flex: none;
+}
+
+.admin-empresas__exportar {
+    padding: 10px 14px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    background: #fff;
+    color: #1b2a41;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.admin-empresas__exportar:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.admin-empresas__historial {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.admin-empresas__historial li {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border-left: 3px solid #e5e7eb;
+    padding-left: 10px;
+    font-size: 14px;
+}
+
+.admin-empresas__historial span {
+    color: #6b7280;
+    font-size: 12px;
+}
+
+.admin-empresas__historial em {
+    font-style: normal;
+    color: #1b2a41;
+}
+.admin-empresas__reportes-pendientes {
+    display: inline-block;
+    min-width: 22px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: #dbeafe;
+    color: #1e40af;
+    font-weight: 700;
+    text-align: center;
+}
+
+.admin-empresas__detalle h3 small {
+    font-weight: 400;
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.admin-empresas__reportes tr.revisado td {
+    color: #94a3b8;
+}
+
+.admin-empresas__reportes a {
+    color: #1e3a8a;
+    font-weight: 600;
+    white-space: nowrap;
+}

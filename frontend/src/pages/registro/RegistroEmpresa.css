@@ -1,0 +1,13 @@
+
+.ruc-lookup-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.ruc-lookup-group input {
+    flex: 1;
+}
+
+.ruc-lookup-btn {
+    white-space: nowrap;
+}

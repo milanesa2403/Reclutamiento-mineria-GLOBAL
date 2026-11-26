@@ -1,0 +1,1 @@
+ALTER TABLE usuario ALTER COLUMN password_hash DROP NOT NULL;
