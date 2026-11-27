@@ -124,8 +124,16 @@ resource "aws_launch_template" "web" {
   }
 
   user_data = base64encode(templatefile("${path.module}/templates/user_data.sh.tftpl", {
-    region    = var.aws_region
-    log_group = aws_cloudwatch_log_group.web.name
+    region          = var.aws_region
+    log_group       = aws_cloudwatch_log_group.web.name
+    ecr_registry    = split("/", aws_ecr_repository.backend.repository_url)[0]
+    ecr_repository  = aws_ecr_repository.backend.repository_url
+    image_parameter = aws_ssm_parameter.imagen_backend.name
+    db_host         = aws_db_instance.main.address
+    db_name         = aws_db_instance.main.db_name
+    db_secret_arn   = aws_db_instance.main.master_user_secret[0].secret_arn
+    jwt_parameter   = aws_ssm_parameter.jwt.name
+    cvs_bucket      = aws_s3_bucket.cvs.id
   }))
 
   tag_specifications {
