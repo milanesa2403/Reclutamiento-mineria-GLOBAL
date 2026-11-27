@@ -1,0 +1,199 @@
+.cargando {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    text-align: center;
+}
+
+.cargando--pagina {
+    width: 100%;
+    min-height: 60vh;
+    grid-column: 1 / -1;
+}
+
+.cargando--pantalla {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(4px);
+}
+
+.cargando--inline {
+    flex-direction: row;
+    gap: 0.6rem;
+    padding: 0.5rem 0;
+}
+.cargando--inline .cargando-spinner {
+    width: 24px;
+    height: 24px;
+}
+.cargando--inline .cg-orbita,
+.cargando--inline .cg-aro { display: none; }
+
+.cg-escena {
+    width: clamp(110px, 12vw, 140px);
+    aspect-ratio: 1;
+}
+.cg-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.cg-pista,
+.cg-vuelta {
+    fill: none;
+    transform-origin: 100px 100px;
+}
+.cg-pista {
+    stroke: #dbe5f1;
+    stroke-width: 3;
+}
+.cg-vuelta {
+    stroke: #F26A21;
+    stroke-width: 5;
+    stroke-linecap: round;
+    stroke-dasharray: 110 470;
+    animation: cg-girar 1.8s linear infinite;
+}
+
+.cg-montana {
+    fill: rgba(30, 90, 168, 0.1);
+    stroke: #1E5AA8;
+    stroke-width: 5;
+    stroke-linejoin: round;
+    stroke-dasharray: 380;
+    stroke-dashoffset: 380;
+    animation: cg-dibujar 2.4s ease-in-out infinite;
+}
+
+.cg-cumbre {
+    fill: #F26A21;
+    transform-origin: 90px 74px;
+    animation: cg-latido-cumbre 1.2s ease-in-out infinite;
+}
+
+.cg-chispa {
+    fill: #F26A21;
+    opacity: 0;
+    animation: cg-chispa 1.2s ease-out infinite;
+}
+.cg-chispa--2 {
+    fill: #1E5AA8;
+    animation-delay: 0.4s;
+}
+
+.cargando-spinner {
+    position: relative;
+    width: 72px;
+    height: 72px;
+}
+
+.cg-arco {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, transparent 0%, transparent 25%, #1E5AA8 60%, #F26A21 100%);
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 calc(100% - 4px));
+    mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 calc(100% - 4px));
+    animation: cg-girar 0.9s linear infinite;
+}
+
+.cg-aro {
+    position: absolute;
+    inset: 13px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #F26A21;
+    border-left-color: #1E5AA8;
+    animation: cg-girar 1.3s cubic-bezier(0.6, 0.1, 0.4, 0.9) infinite reverse;
+}
+
+.cg-orbita {
+    position: absolute;
+    inset: -7px;
+    animation: cg-girar 2.4s linear infinite;
+}
+.cg-orbita::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    margin-left: -4px;
+    border-radius: 50%;
+    background: #1E5AA8;
+    box-shadow: 0 0 10px rgba(30, 90, 168, 0.6);
+}
+
+.cg-nucleo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 14px;
+    margin: -7px 0 0 -7px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #F26A21, #1E5AA8);
+    animation: cg-latido 1.2s ease-in-out infinite;
+}
+
+.cargando-texto {
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1E3A5F;
+    letter-spacing: 0.02em;
+}
+
+.cg-puntos {
+    display: inline-flex;
+    gap: 3px;
+    margin-left: 5px;
+}
+.cg-puntos i {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #F26A21;
+    animation: cg-salto 0.9s ease-in-out infinite;
+}
+.cg-puntos i:nth-child(2) { background: #1E5AA8; animation-delay: 0.15s; }
+.cg-puntos i:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes cg-girar {
+    to { transform: rotate(360deg); }
+}
+@keyframes cg-dibujar {
+    0%   { stroke-dashoffset: 380; }
+    55%  { stroke-dashoffset: 0; }
+    85%  { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: -380; }
+}
+@keyframes cg-latido-cumbre {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.15); }
+}
+@keyframes cg-chispa {
+    0%   { opacity: 0; transform: translate(0, 6px) scale(0.6); }
+    30%  { opacity: 1; }
+    100% { opacity: 0; transform: translate(-6px, -16px) scale(1.2); }
+}
+@keyframes cg-latido {
+    0%, 100% { transform: scale(0.7); box-shadow: 0 0 0 0 rgba(242, 106, 33, 0.5); }
+    50%      { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(242, 106, 33, 0); }
+}
+@keyframes cg-salto {
+    0%, 100% { transform: translateY(0); opacity: 0.4; }
+    50%      { transform: translateY(-4px); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cargando * { animation-duration: 4s !important; }
+}

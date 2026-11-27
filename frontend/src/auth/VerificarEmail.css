@@ -1,0 +1,57 @@
+
+.verificar-email {
+    padding: 3rem 1rem;
+}
+
+.verificar-email-tarjeta {
+    max-width: 520px;
+    text-align: center;
+}
+
+.verificar-email-icono {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 1rem;
+    border-radius: 50%;
+    background: var(--primary-orange-light);
+    color: var(--primary-orange);
+}
+
+.verificar-email-tarjeta .form-header-box {
+    margin-bottom: 1.5rem;
+}
+
+
+.verificar-email-tarjeta .alert-message {
+    justify-content: center;
+    text-align: center;
+}
+
+.verificar-email-pie {
+    margin-top: 1.5rem;
+}
+
+.verificar-email-enlace {
+    color: var(--primary-orange);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.verificar-email-tarjeta .custom-registration-form {
+    text-align: left;
+}
+
+.verificar-email-pie {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.verificar-email-pie button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}

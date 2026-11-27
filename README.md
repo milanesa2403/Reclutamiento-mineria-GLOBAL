@@ -122,3 +122,8 @@ mvn spring-boot:run   # http://localhost:8080
 ```
 Admin de prueba (solo perfil distinto de `prod`): `admin@mineria.com` / `AdminMineria123!`.
 En produccion define `JWT_SECRETO` (min. 32 bytes) y `SPRING_PROFILES_ACTIVE=prod`.
+
+## Backend y Frontend
+- `backend/`: API REST Spring Boot (Java 17). Ver `backend/README.md` (endpoints, mapa RNF -> codigo, como ejecutar y probar).
+- `frontend/`: React + Vite (avance). Ver `frontend/README.md`.
+- El pipeline ejecuta `mvn verify` (backend) y `npm run build` (frontend) en cada push y pull request.

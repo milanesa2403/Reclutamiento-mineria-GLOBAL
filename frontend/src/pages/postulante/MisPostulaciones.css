@@ -1,0 +1,447 @@
+.mis-postulaciones {
+    width: 100%;
+    color: #0f172a;
+    padding: 8px 0 30px;
+}
+
+.mis-postulaciones-titulo {
+    margin: 0 0 16px;
+    color: #0f172a;
+    font-size: 28px;
+    font-weight: 800;
+}
+
+.mis-postulaciones-filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 22px;
+}
+
+.mis-postulaciones-filtros button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 17px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    color: #475569;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mis-postulaciones-filtros button:hover {
+    border-color: #d95d18;
+    color: #d95d18;
+    background: #fff7ed;
+}
+
+.mis-postulaciones-filtros button.activo {
+    background: #d95d18;
+    border-color: #d95d18;
+    color: #ffffff;
+}
+
+.mis-postulaciones-lista {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+}
+
+.mis-postulaciones-fila {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    padding: 14px 18px;
+    border: none;
+    border-bottom: 1px solid #eef2f6;
+    background: #ffffff;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.mis-postulaciones-fila:last-child {
+    border-bottom: none;
+}
+
+.mis-postulaciones-fila:hover,
+.mis-postulaciones-fila.seleccionada {
+    background: #f1f5f9;
+}
+
+.mis-postulaciones-fila > span:nth-child(2) {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+.mis-postulaciones-fila strong {
+    color: #0f172a;
+    font-size: 15px;
+}
+
+.mis-postulaciones-fila small {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #64748b;
+    font-size: 12px;
+}
+
+.mis-postulaciones-fila .mis-postulaciones-empresa {
+    color: #334155;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.mis-postulaciones-logo {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    border-radius: 9px;
+    background: #f8fafc;
+    color: #475569;
+    font-weight: 800;
+}
+
+.mis-postulaciones-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mis-postulaciones-estado {
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.mis-postulaciones .estado-postulado,
+.mis-postulaciones .estado-retirado {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.mis-postulaciones .estado-en_revision {
+    background: #fff7e6;
+    color: #a96a11;
+}
+
+.mis-postulaciones .estado-entrevista {
+    background: #e8f1fd;
+    color: #1d5fae;
+}
+
+.mis-postulaciones .estado-aceptado,
+.mis-postulaciones .estado-confirmado {
+    background: #e8f7ee;
+    color: #15803d;
+}
+
+.mis-postulaciones .estado-confirmado {
+    box-shadow: inset 0 0 0 1px #86efac;
+}
+
+.mis-postulaciones .estado-descartado {
+    background: #fdecec;
+    color: #b42318;
+}
+
+.mis-postulaciones-vacio {
+    min-height: 320px;
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: #ffffff;
+    border: 1px dashed #cbd5e1;
+    border-radius: 12px;
+}
+
+.mis-postulaciones-vacio svg {
+    color: #d95d18;
+}
+
+.mis-postulaciones-vacio h2 {
+    margin: 18px 0 10px;
+    color: #0f172a;
+    font-size: 20px;
+}
+
+.mis-postulaciones-vacio p {
+    max-width: 440px;
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.mis-postulaciones button:focus-visible {
+    outline: 2px solid #d95d18;
+    outline-offset: 3px;
+}
+
+.mis-postulaciones-cuerpo.con-detalle {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 440px);
+    gap: 18px;
+    align-items: start;
+}
+
+.mis-postulaciones-panel {
+    position: sticky;
+    top: 16px;
+    max-height: calc(100vh - 32px);
+    overflow-y: auto;
+    padding: 22px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+}
+
+.mis-postulaciones-panel-empresa {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    color: #475569;
+    font-size: 13px;
+}
+
+.mis-postulaciones-panel-empresa span:nth-child(2) {
+    flex: 1;
+}
+
+.mis-postulaciones-panel-empresa button {
+    display: flex;
+    padding: 6px;
+    border: none;
+    border-radius: 8px;
+    background: #f1f5f9;
+    color: #475569;
+    cursor: pointer;
+}
+
+.mis-postulaciones-panel h2 {
+    margin: 0 0 4px;
+    color: #0f172a;
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.mis-postulaciones-panel > p {
+    margin: 0 0 14px;
+    color: #64748b;
+    font-size: 13px;
+}
+
+.mis-postulaciones-aviso {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 16px;
+    padding: 12px 14px;
+    border-radius: 9px;
+    font-size: 13px;
+}
+
+.mis-postulaciones-aviso span {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.mis-postulaciones-aviso div {
+    display: flex;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+.mis-postulaciones-aviso button {
+    padding: 6px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: #ffffff;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.mis-postulaciones-aviso .mis-postulaciones-confirmar {
+    border-color: #16a34a;
+    background: #16a34a;
+    color: #ffffff;
+}
+
+.mis-postulaciones-aviso .mis-postulaciones-rechazar {
+    border-color: #b42318;
+    background: #b42318;
+    color: #ffffff;
+}
+
+.mis-postulaciones-panel dl {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 16px;
+    margin: 0 0 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #eef2f6;
+}
+
+.mis-postulaciones-panel h3 {
+    margin: 0 0 10px;
+    color: #0f172a;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.mis-postulaciones-labores {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin: 0 0 12px;
+    padding: 9px 12px;
+    border-radius: 8px;
+    background: #f1f5f9;
+    color: #0f172a;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.mis-postulaciones-panel dl .ancho {
+    grid-column: 1 / -1;
+}
+
+.mis-postulaciones-panel dd.texto {
+    color: #475569;
+    font-weight: 400;
+    line-height: 1.55;
+    white-space: pre-line;
+}
+
+.mis-postulaciones-panel dt {
+    color: #64748b;
+    font-size: 12px;
+}
+
+.mis-postulaciones-panel dd {
+    margin: 2px 0 0;
+    color: #0f172a;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.mis-postulaciones-enlace {
+    padding: 0;
+    border: none;
+    background: none;
+    color: #64748b;
+    font-family: inherit;
+    font-size: 13px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+@media (max-width: 1000px) {
+    .mis-postulaciones-cuerpo.con-detalle {
+        grid-template-columns: 1fr;
+    }
+
+    .mis-postulaciones-panel {
+        position: static;
+        max-height: none;
+    }
+}
+
+.mis-postulaciones-nuevo {
+    margin-left: 8px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: #dc2626;
+    color: #fff;
+    font-size: 0.7rem;
+    vertical-align: middle;
+}
+
+.valorar-empresa {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+    padding: 12px 14px;
+    border: 1px solid #fde68a;
+    border-radius: 9px;
+    background: #fffbeb;
+    font-size: 13px;
+}
+
+.valorar-empresa h3 {
+    margin: 0;
+    font-size: 14px;
+}
+
+.valorar-empresa-ayuda,
+.valorar-empresa-comentario {
+    margin: 0;
+    color: #475569;
+}
+
+.valorar-empresa label {
+    color: #475569;
+}
+
+.valorar-empresa textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 13px;
+    resize: vertical;
+}
+
+.valorar-empresa-acciones {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.valorar-empresa-acciones button {
+    padding: 6px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: #ffffff;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.valorar-empresa-acciones .mis-postulaciones-confirmar {
+    border-color: #16a34a;
+    background: #16a34a;
+    color: #ffffff;
+}
+
+.valorar-empresa-error {
+    margin: 0;
+    color: #b42318;
+}

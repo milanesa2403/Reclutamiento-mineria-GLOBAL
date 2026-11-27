@@ -34,7 +34,12 @@ resource "aws_wafv2_web_acl" "waf_alb" {
     statement {
       rate_based_statement {
         limit              = var.waf_rate_limit
-        aggregate_key_type = "IP"
+        aggregate_key_type = "FORWARDED_IP"
+
+        forwarded_ip_config {
+          header_name       = "X-Forwarded-For"
+          fallback_behavior = "MATCH"
+        }
       }
     }
 

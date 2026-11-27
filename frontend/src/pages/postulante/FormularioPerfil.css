@@ -1,0 +1,525 @@
+
+
+.perfil-form {
+    width: 100%;
+    max-width: 1280px;
+    margin: 20px auto 45px;
+    padding: 0 20px;
+    color: #142b49;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.perfil-form *,
+.perfil-form *::before,
+.perfil-form *::after {
+    box-sizing: border-box;
+}
+
+
+.perfil-form > h1 {
+    margin: 0 0 6px;
+    color: #142b49;
+    font-size: 27px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+
+.perfil-form > p.muted {
+    margin: 0 0 22px;
+    color: #718198;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+.perfil-form fieldset {
+    min-width: 0;
+    margin: 0 0 14px;
+    padding: 18px 20px 20px;
+    border: 1px solid #e0e6ee;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(20, 43, 73, 0.04);
+}
+
+.perfil-form legend {
+    padding: 0 10px;
+    color: #142b49;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 1.4;
+}
+
+.perfil-form legend::before {
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 16px;
+    margin-right: 9px;
+    border-radius: 4px;
+    background: #ff671d;
+    vertical-align: -3px;
+}
+
+.perfil-form fieldset > p.muted {
+    margin: 0 0 14px;
+    color: #7b899c;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+.perfil-form .campo {
+    min-width: 0;
+    margin: 0 0 12px;
+}
+
+.perfil-form .campo label {
+    display: block;
+    margin: 0 0 5px;
+    color: #263b56;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.perfil-form input:not([type="checkbox"]):not([type="radio"]),
+.perfil-form textarea,
+.perfil-form select {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    min-height: 38px;
+    padding: 8px 11px;
+    border: 1px solid #d7e0eb;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #142b49;
+    font-family: inherit;
+    font-size: 12px;
+    line-height: 1.5;
+    transition:
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
+}
+
+.perfil-form textarea {
+    min-height: 85px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+.perfil-form input::placeholder,
+.perfil-form textarea::placeholder {
+    color: #9aa8ba;
+}
+
+.perfil-form input:focus,
+.perfil-form textarea:focus,
+.perfil-form select:focus {
+    outline: none;
+    border-color: #ff671d;
+    box-shadow: 0 0 0 3px rgba(255, 103, 29, 0.12);
+}
+
+.perfil-form input:disabled,
+.perfil-form textarea:disabled,
+.perfil-form select:disabled {
+    background: #f1f4f8;
+    color: #78869a;
+    cursor: not-allowed;
+}
+
+
+.perfil-form .campo small,
+.perfil-form .campo .ayuda {
+    display: block;
+    margin-top: 5px;
+    color: #8795a8;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+
+.perfil-form .dos-columnas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 18px;
+    row-gap: 4px;
+    align-items: start;
+}
+
+.perfil-form .dos-columnas > * {
+    min-width: 0;
+}
+
+
+.perfil-form .fila,
+.perfil-form fieldset,
+.perfil-form .campo {
+    overflow-wrap: break-word;
+}
+
+
+.perfil-form .filas {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.perfil-form .fila {
+    min-width: 0;
+    padding: 15px 17px;
+    border: 1px solid #e1e7ef;
+    border-radius: 8px;
+    background: #f8fafc;
+}
+
+
+.perfil-form .fila-cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e5ebf2;
+}
+
+.perfil-form .fila-cabecera h3 {
+    margin: 0;
+    color: #18324f;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+
+.perfil-form .filas > .fila + .fila {
+    margin-top: 0;
+}
+
+
+.perfil-form .quitar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    min-height: 30px;
+    padding: 6px 11px;
+    border: 1px solid #ffd6d6;
+    border-radius: 6px;
+    background: #fff6f6;
+    color: #df3b3b;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.perfil-form .quitar:hover {
+    background: #ffe8e8;
+}
+
+
+.perfil-form .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 37px;
+    padding: 8px 15px;
+    border: 1px solid #ff671d;
+    border-radius: 6px;
+    background: #fff7f1;
+    color: #ed5e16;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.3;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+            background 0.2s ease,
+            border-color 0.2s ease;
+}
+
+.perfil-form .btn:hover:not(:disabled) {
+    background: #ffeadc;
+}
+
+.perfil-form .btn-primary {
+    border-color: #ff671d;
+    background: #ff671d;
+    color: #ffffff;
+}
+
+.perfil-form .btn-primary:hover:not(:disabled) {
+    border-color: #e95810;
+    background: #e95810;
+    color: #ffffff;
+}
+
+.perfil-form .btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+.perfil-form .check {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 5px 0 13px;
+    color: #40536c;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.4;
+    cursor: pointer;
+}
+
+.perfil-form .check input {
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    flex-shrink: 0;
+    margin: 0;
+    accent-color: #ff671d;
+}
+
+
+.perfil-form .agregar-linea {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    width: 100%;
+}
+
+.perfil-form .agregar-linea .campo {
+    flex: 1;
+    min-width: 0;
+    margin-bottom: 0;
+}
+
+.perfil-form .agregar-linea .btn {
+    flex-shrink: 0;
+    margin-top: 24px;
+}
+
+
+.perfil-form .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 14px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.perfil-form .chips li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 100%;
+    padding: 6px 10px;
+    border: 1px solid #ffd9c4;
+    border-radius: 6px;
+    background: #fff1e8;
+    color: #c65110;
+    font-size: 12px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.perfil-form .chips button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 0 3px;
+    border: none;
+    background: transparent;
+    color: #c65110;
+    font-size: 17px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+
+.perfil-form .form-error {
+    margin: 0 0 18px;
+    padding: 13px 15px;
+    border: 1px solid #f2c6c6;
+    border-left: 4px solid #dc3545;
+    border-radius: 7px;
+    background: #fff3f3;
+    color: #b52a36;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.perfil-form .form-error p {
+    margin: 0;
+}
+
+.perfil-form .form-error ul {
+    margin: 9px 0 0;
+    padding-left: 20px;
+}
+
+
+.perfil-form .actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+    padding: 18px 0 25px;
+    border-top: 1px solid #e3e9f0;
+}
+
+.perfil-form .actions .btn-primary {
+    min-width: 220px;
+    min-height: 42px;
+    font-size: 13px;
+}
+
+
+.perfil-form .btn:focus-visible,
+.perfil-form .quitar:focus-visible,
+.perfil-form .chips button:focus-visible,
+.perfil-form .check input:focus-visible {
+    outline: 3px solid #ffb27f;
+    outline-offset: 3px;
+}
+
+
+@media (max-width: 900px) {
+    .perfil-form {
+        padding: 0 16px;
+    }
+
+    .perfil-form fieldset {
+        padding: 17px;
+    }
+
+    .perfil-form .dos-columnas {
+        column-gap: 14px;
+    }
+}
+
+
+@media (max-width: 700px) {
+    .perfil-form {
+        margin: 16px auto 35px;
+        padding: 0 12px;
+    }
+
+    .perfil-form > h1 {
+        font-size: 23px;
+    }
+
+    .perfil-form fieldset {
+        padding: 15px;
+        margin-bottom: 13px;
+    }
+
+    .perfil-form legend {
+        font-size: 15px;
+    }
+
+    .perfil-form .fila {
+        padding: 13px;
+    }
+
+    .perfil-form .dos-columnas {
+        grid-template-columns: 1fr;
+        gap: 2px;
+    }
+
+    .perfil-form .agregar-linea {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .perfil-form .agregar-linea .campo {
+        width: 100%;
+    }
+
+    .perfil-form .agregar-linea .btn {
+        margin-top: 0;
+        align-self: flex-start;
+    }
+
+    .perfil-form .actions {
+        justify-content: stretch;
+    }
+
+    .perfil-form .actions .btn-primary {
+        width: 100%;
+        min-width: 0;
+    }
+}
+
+
+@media (max-width: 420px) {
+    .perfil-form {
+        padding: 0 10px;
+    }
+
+    .perfil-form fieldset {
+        padding: 13px;
+    }
+
+    .perfil-form .fila {
+        padding: 11px;
+    }
+
+    .perfil-form .fila-cabecera {
+        align-items: flex-start;
+    }
+
+    .perfil-form .fila-cabecera h3 {
+        font-size: 13px;
+    }
+
+    .perfil-form .btn {
+        font-size: 11px;
+    }
+}
+
+
+.perfil-form .sugeridas {
+    margin-top: 14px;
+}
+
+.perfil-form .sugeridas-lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 6px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.perfil-form .sugeridas-lista button {
+    padding: 5px 10px;
+    border: 1px dashed #ffb894;
+    border-radius: 6px;
+    background: #fff;
+    color: #c65110;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.perfil-form .sugeridas-lista button:hover,
+.perfil-form .sugeridas-lista button:focus-visible {
+    background: #fff1e8;
+}
