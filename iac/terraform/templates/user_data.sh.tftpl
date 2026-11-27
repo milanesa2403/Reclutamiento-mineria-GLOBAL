@@ -42,6 +42,10 @@ DB_PASSWORD=$(echo "$SECRETO" | jq -r .password)
 JWT_SECRET=$JWT
 AWS_REGION=$REGION
 APP_S3_BUCKET=${cvs_bucket}
+COGNITO_ISSUER_URI=${cognito_issuer}
+COGNITO_CLIENT_ID=${cognito_client_id}
+FRONTEND_URL=${frontend_url}
+CORS_ALLOWED_ORIGINS=${frontend_url}
 ENV
   umask 022
 
